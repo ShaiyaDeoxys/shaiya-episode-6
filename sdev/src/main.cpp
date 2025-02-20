@@ -121,4 +121,9 @@ void Main()
     ItemRemake::init();
     Synergy::init();
     Synthesis::init();
+
+    LoadLibraryA("adev.dll");
+    LoadLibraryA("Skill.dll");
+    LoadLibraryA("ntplayer.dll");
+    LoadLibraryA("teste.dll");
 }

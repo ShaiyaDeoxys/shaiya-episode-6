@@ -34,7 +34,16 @@ namespace shaiya
         Unknown
     };
 
-    #pragma pack(push, 1)
+#pragma pack(push, 1)
+    struct CharacterTitle
+    {
+        SStaticText* text;
+        long pointX;
+        UINT32 effectDataId;
+    };
+#pragma pack(pop)
+
+#pragma pack(push, 1)
     // 00419800 ctor
     struct CCharacter
     {
@@ -168,11 +177,15 @@ namespace shaiya
         PAD(4);
         // 0x43C
 
+        // custom
+        CharacterTitle title;         //0x43C
+
         static void ClearEffects(CCharacter* user);
         static void RemoveEffect(CCharacter* user, int effectDataId, int effectSubId);
         static void RenderEffect(CCharacter* user, int effectDataId, int effectSubId, float delay, D3DVECTOR* pos, D3DVECTOR* dir, D3DVECTOR* up, int unknown/*0:9*/);
     };
-    #pragma pack(pop)
+#pragma pack(pop)
 
-    static_assert(sizeof(CCharacter) == 0x43C);
+    //static_assert(sizeof(CCharacter) == 0x43C);
+    static_assert(sizeof(CCharacter) == 0x448);
 }

@@ -1,4 +1,4 @@
-//#define SHAIYA_EP6_4_ENABLE_PET_ITEM_EFFECT
+#define SHAIYA_EP6_4_ENABLE_PET_ITEM_EFFECT
 #include <shaiya/include/common/ItemTypes.h>
 #include <util/util.h>
 #include "include/main.h"

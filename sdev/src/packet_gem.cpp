@@ -1,4 +1,4 @@
-//#define SHAIYA_EP6_4_ENABLE_0806_HANDLER
+#define SHAIYA_EP6_4_ENABLE_0806_HANDLER
 #include <random>
 #include <ranges>
 #include <string>
@@ -511,15 +511,46 @@ namespace packet_gem
         case ItemEffect::WisRecreationRune:
         case ItemEffect::RecRecreationRune:
         case ItemEffect::LucRecreationRune:
-        {
+        /* {
             maxBonus *= 2;
             maxBonus = (maxBonus > 99) ? 99 : maxBonus;
             break;
         }
         default:
             break;
-        }
+        }*/
+        {
+            // Calcula o valor de maxBonus
+            maxBonus *= 2;  // Multiplica o maxBonus por 4 (seu cálculo)
 
+            // Cria um número aleatório entre 1 e 100 para controlar a chance
+            std::random_device seed;
+            std::mt19937 eng(seed());
+            std::uniform_int_distribution<int> dist(1, 100);  // Número aleatório de 1 a 100 para determinar a chance
+            int randomChance = dist(eng);
+
+            // Se o número aleatório for 1 a 5 (5% de chance), define um valor maior que 50
+            if (randomChance <= 5)
+            {
+                // Se tiver a chance de ser maior que 50, definimos maxBonus para um valor aleatório entre 51 e 99
+                std::uniform_int_distribution<int> highDist(51, 99);  // Gera um valor entre 51 e 99
+                maxBonus = highDist(eng);
+            }
+            else
+            {
+                // Caso contrário, maxBonus fica entre 1 e 50
+                std::uniform_int_distribution<int> lowDist(1, 50);  // Gera um valor entre 1 e 50
+                maxBonus = lowDist(eng);
+            }
+
+            // Agora, o maxBonus não pode ser maior que 99
+            maxBonus = (maxBonus > 99) ? 99 : maxBonus;
+
+
+        }
+        default:
+            break;
+        }
         std::random_device seed;
         std::mt19937 eng(seed());
 
